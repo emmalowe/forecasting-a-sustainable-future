@@ -1,13 +1,17 @@
 # Predicting wind speed using time series techniques
 
 ## Project overview
-More and more of the world's power is being generated from renewable energy sources such as solar and wind that inherently produce variable output, due to their dependence on weather conditions. Grid operators need to balance supply and demand across different sources of energy, and so producing accurate forecasts for renewable power generation is important so as not to over or under-order power from other sources. Under-ordering could lead to blackouts whereas over-ordering can lead to fires from power surges as well as unnecessary emmissions. Considering wind energy specifically, as power output from a wind farm largely depends on the wind speed, having accurate forecasts for wind dynamics will allow for better predictions in power output and thus improve grid efficiency. 
+More and more of the world's power is being generated from renewable energy sources such as solar and wind that inherently produce variable output, due to their dependence on weather conditions. Grid operators need to balance supply and demand across different sources of energy, and so producing accurate forecasts for renewable power generation is important so as not to over or under-order power from other sources. Under-ordering could lead to blackouts whereas over-ordering can lead to fires from power surges as well as unnecessary emmissions.
 
-The goal of this project is to use time series analysis to create an accurate hourly forecast for wind speed at 100m altitude over one day across the state of Wyoming. Wyoming was selected as there are large variations in wind speeds across the state, so the final model will be valid for a full range of wind speeds. As an added bonus, Wyoming is square in shape, making it easier to extract Wyoming specific data from the US-wide dataset. I also have a personal soft-spot for Wyoming having spent part of my engagement honeymoon in the incredible Yellowstone National Park!
+The goal of this project is to use time series analysis to create accurate 48 hour ahead forecasts for hourly power output across seven wind farms, based on historical measurements and wind forecast information. Model performance will be guided by the RMSE from true power output values. The model will be build up in the following stages:
 
-Model performance will be guided by the RMSE from true wind speed values. The model will initially be built using a pure ARIMA model on historical wind speeds, and then enhanced by incorporating other relevant factors such as temperature and pressure. 
+    Stage 1 - Modeling power output at one farm, using a time series model built on previous power output
+    Stage 2 - Modeling power output at one farm, using a LSTM
+    Stage 3 - Modeling power output at one farm, using a LSTM that incorporates weather forecasts
+    Stage 4 - Modeling power output across all farms
+
 
 ## Data source
 
-The dataset used for modeling is the <a href="https://www.nrel.gov/grid/wind-toolkit.html">NREL WIND toolkit</a>. A newly enhanced public version of the dataset was released in May 2018, and contains 50TB of data covering barometric pressure, wind speed and direction, relative humidity, temperature, and air density data from 2007 to 2013, in hourly intervals, on a uniform 2km grid that covers the continental US and beyond. (The previous version released in 2015 contained 2TB of data.)
+This project is based on the <a href="https://www.kaggle.com/c/GEF2012-wind-forecasting#description">Global Energy Forecasting Competition 2012 - Wind Forecasting from Kaggle</a>, and uses the same datasets. The key dataset is 'train.csv', which contains the hourly (normalised) wind power measurements from all seven windfarms. In addition, there is a wind forecast dataset for each wind farm, which contains 48 hour ahead hourly forecasts for wind speed and direction, where forecasts are produced at 12 hour intervals. Finally, the file 'benchmark.csv' provides example forecast results from the persistence forecast method (i.e. the forecast is that the power output doesn't change), which  acts as a template for submission to kaggle.
 
