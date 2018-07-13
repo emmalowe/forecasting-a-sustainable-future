@@ -1,4 +1,5 @@
-<h1 align="center">Forecasting a sustainable future: <br> predicting wind farm power output</h1>
+<h1 align="center">Forecasting a sustainable future</h1>
+<h2 align="center">Predicting wind farm power output</h2>
 <p align="center">
   <img width="600" height="350" src="images/wind_farm.png">
 </p>
@@ -10,7 +11,6 @@
 - [Data](#data)
 - [Exploratory data analysis](#exploratory-data-analysis)
 - [Modeling](#modeling)
-- [Conclusion](#conclusion)
 - [Next steps](#next-steps)
 - [Acknowledgments](#acknowledgments)
 
@@ -67,7 +67,7 @@ The first step in EDA for this project was therefore to unpick and verify the la
 Before creating a forecasting model, it is desirable to remove trends and seasonality in the data to achieve stationarity before modeling. This applies both to time series models and to LSTMs. The time series plot for the first wind farm suggested that the power data didn't contain any trends or seasonality:
 
 <p align="center">
-  <img width="600" height="350" src="images/wp1_time_series.png">
+  <img width="700" height="400" src="images/wp1_time_series.png">
 </p>
 
 This was confirmed by running the Dickey-Fuller test, which produced a p-value less than a trillionth of a percent. Therefore the null hypothesis that the time series contains a unit root (and therefore is non-stationary) was rejected.
@@ -81,7 +81,7 @@ This was confirmed by running the Dickey-Fuller test, which produced a p-value l
 The first stage of modeling was to produce a univariate ARIMA model for power output at the first wind farm. To get an idea of what model parameters would be a good starting point, I plotted the ACF and PACF:
 
 <p align="center">
-  <img width="300" height="200" src="images/ACF.png"><img width="300" height="200" src="images/PACF.png">
+  <img width="350" height="250" src="images/ACF.png"><img width="350" height="250" src="images/PACF.png">
 </p>
 
 The plots showed a classic AR2 signature, where the PACF cuts off dramatically after 2 lags, and the ACF reduces steadily over time. This model produced an RMSE of 0.2726, which was a ~13% improvement on the baseline RMSE of 0.3145 from the persistent forecast method.
@@ -91,7 +91,7 @@ At this point I spent some time exploring other model parameters by writing a gr
 To get an overall view of how the model was performing I made a widget that allows the user to look at a particular forecasting window and confidence level. Full functionality is only available via the notebook, but here is a snapshot:
 
 <p align="center">
-  <img width="600" height="250" src="images/ARIMA_widget.png">
+  <img width="800" height="300" src="images/ARIMA_widget.png">
 </p>
 
 #### Univariate LSTM model
@@ -118,7 +118,7 @@ The model built from the optimal parameter set produced an RMSE of 0.2557, which
 To visualize the output from the model, I created another widget showing the predictions made over selected forecasting windows and how these compared with the target and ARIMA predictions. Again, full functionality is only available via the notebook, but here is a snapshot:
 
 <p align="center">
-  <img width="600" height="250" src="images/LSTM_widget.png">
+  <img width="800" height="300" src="images/LSTM_widget.png">
 </p>
 
 
@@ -150,4 +150,4 @@ Thank you to the following people for all the support they gave me during this p
 - Jason Brownlee of <a href="https://machinelearningmastery.com">Machine Learning Mastery</a> who through his amazingly instructive blog posts has unwittingly provided me with a wealth of technical information without which I wouldn't have been able to complete this project.
 
 
-- My husband Dave for his constant, unwavering support in everything I do, but especially for making sure I've been fed and rested during the program, and for letting me chew his ear off about cool new concepts I've learnt.
+- My husband Dave for his constant, unwavering support in everything I do, but especially for making sure I've been fed and rested during the program, and for letting me bend his ear about cool new concepts I've learnt.
