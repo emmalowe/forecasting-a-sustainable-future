@@ -35,15 +35,15 @@ The python libraries used in this project are:
 
 ## Problem statement
 
-More and more of the world's power is being generated from renewable energy sources such as solar and wind that inherently produce variable output, due to their dependence on weather conditions. Grid operators need to balance supply and demand across different sources of energy, and so producing accurate forecasts for renewable power generation is important so as not to over or under-order power from other sources. Under-ordering could lead to blackouts whereas over-ordering can lead to fires from power surges as well as unnecessary C02 emissions.
+More and more of the world's power is being generated from renewable energy sources such as solar and wind that inherently produce variable output, due to their dependence on weather conditions. Grid operators need to balance supply and demand across different sources of energy, and so producing accurate forecasts for renewable power generation is important so as not to over or under-order power from other sources. Under-ordering could lead to blackouts whereas over-ordering can lead to fires from power surges as well as unnecessary CO2 emissions.
 
-The overall goal of this project is to create accurate 48 hour ahead forecasts for hourly power output across seven wind farms, based on historical measurements and wind forecast information. Model performance is guided by the RMSE from true power output values.
+The overall goal of this project is to create accurate 48 hour forecasts for hourly power output across seven wind farms, based on previous power output data and current wind forecasts. Model performance is guided by the RMSE from true power output values.
 
-The models are built up in the following stages:
+The models have been built up in the following stages:
 
-1. Univariate time series model of power output at a single wind farm
+1. Univariate ARIMA model of power output at a single wind farm
 2. Univariate LSTM model of power output at a single wind farm
-3. LSTM model of power output at a single wind farm, that incorporates weather forecasts
+3. LSTM model of power output at a single wind farm, with weather forecasts as an additional feature
 4. A suite of LSTM models of power output across all seven wind farms
 
 Due to time constraints, only the first two stages have been achieved so far.
@@ -64,17 +64,17 @@ The first step in EDA for this project was therefore to unpick and verify the la
 
 #### Exploring patterns in the data
 
-Before creating a forecasting model, it is desirable to remove trends and seasonality in the data to achieve stationarity before modeling. This applies both to time series models and to LSTMs. The time series plot for the first wind farm suggested that the power data didn't contain any trends or seasonality:
+Before creating a forecasting model, it is desirable to remove trends and seasonality in the data to create a stationary time series. This applies to both ARIMA models and to LSTMs. The time series plot for the first wind farm suggested that the power data didn't contain any trends or seasonality:
 
 <p align="center">
   <img width="700" height="400" src="images/wp1_time_series.png">
 </p>
 
-This was confirmed by running the Dickey-Fuller test, which produced a p-value less than a trillionth of a percent. Therefore the null hypothesis that the time series contains a unit root (and therefore is non-stationary) was rejected.
+This was confirmed by running the Dickey-Fuller test, which produced a p-value of less than a trillionth of a percent. Therefore the null hypothesis that the time series contains a unit root (and therefore is non-stationary) was rejected.
 
 ## Modeling
 
-#### Univariate time series model
+#### Univariate ARIMA model
 
 <a href="code/2.1_Model_univariate_time_series.ipynb">Univariate time series model notebook</a>
 
@@ -126,7 +126,7 @@ To visualize the output from the model, I created another widget showing the pre
 
 There is a lot more I'd like to achieve with this project. In particular:
 
-- The SARIMAX model I have used shows distinctly non-normal residuals after running model diagnostics. This means that the confidence intervals for the forecasts, which assume normally distributed residuals, are not accurate and should be be adjusted to allow for the higher kurtosis present in the data.
+- The ARIMA model I have used shows distinctly non-normal residuals after running model diagnostics. This means that the confidence intervals for the forecasts, which assume normally distributed residuals, are not accurate and should be be adjusted to allow for the higher kurtosis present in the data.
 
 - In moving to an LSTM model, it becomes a lot more difficult to create confidence intervals around the power output forecasts, which is something I'd like to incorporate into my results. Initial research suggests that possible ways of doing this include using a model architecture that outputs a full forecast distribution, or using Monte Carlo simulation.
 
@@ -141,7 +141,7 @@ There is a lot more I'd like to achieve with this project. In particular:
 
 Thank you to the following people for all the support they gave me during this project and the DSI program:
 
-- The teaching staff at <a href="https://generalassemb.ly">General Assembly</a> for getting me started on my data science journey. Special mentions go to Justin Pounders for all his fantastic advice on ARIMA models and LSTMs, and to Mark Popovich for all his one-on-one coaching during the program.
+- The teaching staff at <a href="https://generalassemb.ly">General Assembly</a> for getting me started on my data science journey. Special mentions go to Justin Pounders for all his fantastic advice on ARIMA models and LSTMs, and to Mark Popovich for his one-on-one coaching during the program.
 
 
 - My classmates in the SF DSI Cohort at General Assembly for the  encouragement and technical feedback I've received during the DSI program, and for being fun colleagues to share a beer/boba with after class.
