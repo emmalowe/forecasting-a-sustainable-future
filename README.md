@@ -35,7 +35,7 @@ The python libraries used in this project are:
 
 ## Problem statement
 
-More and more of the world's power is being generated from renewable energy sources such as solar and wind that inherently produce variable output, due to their dependence on weather conditions. Grid operators need to balance supply and demand across different sources of energy, and so producing accurate forecasts for renewable power generation is important so as not to over or under-order power from other sources. Under-ordering could lead to blackouts whereas over-ordering can lead to fires from power surges as well as unnecessary CO2 emissions.
+Thankfully more and more of the energy we use is being generated from renewable sources such as solar and wind. However, these inherently produce variable output, due to their dependence on weather conditions. Grid operators need to carefully balance supply and demand, and so producing accurate forecasts for renewable power generation is important so as not to over or under-order power from other sources. Under-ordering could lead to blackouts whereas over-ordering can lead to fires from power surges as well as unnecessary CO2 emissions.
 
 The overall goal of this project is to create accurate 48 hour forecasts for hourly power output across seven wind farms, based on previous power output data and current wind forecasts. Model performance is guided by the RMSE from true power output values.
 
